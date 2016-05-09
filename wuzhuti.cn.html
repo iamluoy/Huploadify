@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<style>
+		.info {
+			background: #000;
+			width: 500px;
+			height: 300px;
+			margin-top: 10px;
+		}
+		
+		.info span {
+			color: #008B00;
+		}
+		
+		.info p {
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<input type="file" accept="image/jpg" id="file" />
+	<br />
+	<img id="preview" style="width:120px; height:auto" />
+	<br />
+	<input type="button" id="run" value="__ R U N __" />
+	<br />
+	<div class="info">
+		<span>文件类型：<span>
+		<p id="type"></p>
+		<span>文件大小：</span>
+		<p id="size"></p>
+		<span>图片尺寸（宽）</span>
+		<p id="width"></p>
+		<span>图片尺寸（高）</span>
+		<p id="height"></p>
+	</div>
+	<script>
+		window.onload = function() {
+			document.getElementById('run').addEventListener("click", function() {
+				// 获取文件上传域
+				var file = document.getElementById('file').files[0];
+				var file_type = file.type; //文件类型
+				var file_size = file.size; //文件大小
+				var file_name = file.name; //文件名称
+				document.getElementById('type').innerHTML = file_type;
+				document.getElementById('size').innerHTML = file_size;
+				// 图片预览控件(img标签)
+				var preview = document.getElementById('preview');
+				// HTML5 的 FileReader
+				var reader = new FileReader();
+				// 绑定Reader的onload事件
+				reader.onload = function(e) {
+					preview.src = e.target.result;
+					//绑定图片预览控件onload事件
+					preview.onload = function() {
+						var file_width = preview.naturalWidth;
+						var file_height = preview.naturalHeight;
+						document.getElementById('width').innerHTML = file_width;
+						document.getElementById('height').innerHTML = file_height;
+					}
+				}
+				//从文件域中读取文件
+				reader.readAsDataURL(file);
+			});
+		}
+	</script>
+
+</body>
+
+</html>
