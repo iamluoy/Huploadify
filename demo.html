@@ -1,117 +1,128 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>H5 文件上传</title>
-		<link rel="stylesheet" type="text/css" href="Huploadify.css" />
-		<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js"></script>
-		<script type="text/javascript" src="jquery.Huploadify.js"></script>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title>H5 文件上传</title>
+	<link rel="stylesheet" type="text/css" href="Huploadify.css" />
+	<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.Huploadify.js"></script>
+</head>
 
-	<body>
+<body>
+	<div class="uploadify-container">
+		<img class="" src="">
 		<div id="upload1" class="uploadify u1"></div>
-		<button id="btn2">upload</button>
-		<button id="btn3">cancel</button>
-		<button id="btn4">disable</button>
-		<button id="btn5">ennable</button>
-		<button id="btn6">destroy</button>
+	</div>
+	<button id="btn2">upload</button>
+	<button id="btn3">cancel</button>
+	<button id="btn4">disable</button>
+	<button id="btn5">ennable</button>
+	<button id="btn6">destroy</button>
+	<div class="uploadify-container">
+		<img class="" src="">
 		<div id="upload2" class="uploadify u2"></div>
-		<script type="text/javascript">
-			$(function() {
-				var u1 = $('.u1').Huploadify({
-					auto: true,
-					fileTypeExts: '*.*', //允许上传的文件类型
-					multi: false,
-					buttonText: '点击上传',
-					removeTimeout: 1000,
-					formData: {
-						id: '6a16818d-d456-11e5-aa82-0697249d8e49',
-						type: 50,
-						eaid: 2
-					},
-					showUploadedSize: true,
-					uploader: 'addAttach.action',
-					onUploadStart: function(file) {
-						console.log(file.name + '开始上传');
-					},
-					onInit: function(obj) {
-						console.log(obj + '初始化...');
-					},
-					onUploadComplete: function(file) {
-						console.log(file.name + '上传完成');
-					},
-					onCancel: function(file) {
-						console.log(file.name + '删除成功');
-					},
-					onClearQueue: function(queueItemCount) {
-						console.log('有' + queueItemCount + '个文件被删除了');
-					},
-					onDestroy: function() {
-						console.log('destroyed!');
-					},
-					onSelect: function(file) {
-						console.log(file.name + '加入上传队列');
-					},
-					onQueueComplete: function(queueData) {
-						console.log('队列中的文件全部上传完成', queueData);
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			var u1 = $('#upload1').Huploadify({
+				auto: true,
+				fileTypeExts: '*.jpg;*.jpge;*.jpeg;*.gif;*.png', //允许上传的文件类型
+				multi: false,
+				buttonText: '点击上传',
+				removeTimeout: 1000,
+				formData: {
+					id: '6a16818d-d456-11e5-aa82-0697249d8e49',
+					type: 50,
+					eaid: 2
+				},
+				showUploadedSize: true,
+				uploader: 'addAttach.action',
+				onUploadStart: function(file) {
+					//						console.log(file.name + '开始上传');
+				},
+				onInit: function(obj) {
+					//						console.log(obj + '初始化...');
+				},
+				onUploadComplete: function(file, responseText) {
+					console.log(file.name + ' 上传完成： ' + responseText);
+					if (responseText != '0001') {
+						//					        $('.uploadify-container img').attr('src','/files/avatar/' + responseText);
+					} else {
+						alert('上传出错！');
 					}
-				});
-				var u2 = $('.u2').Huploadify({
-					auto: true,
-					fileTypeExts: '*.*', //允许上传的文件类型
-					multi: false,
-					buttonText: '点击上传',
-					removeTimeout: 1000,
-					formData: {
-						key: 123456,
-						key2: 'vvvv'
-					},
-					showUploadedSize: true,
-					uploader: 'ulAvatar.action',
-					onUploadStart: function(file) {
-						console.log(file.name + '开始上传');
-					},
-					onInit: function(obj) {
-						console.log(obj + '初始化...');
-					},
-					onUploadComplete: function(file) {
-						console.log(file.name + '上传完成');
-					},
-					onCancel: function(file) {
-						console.log(file.name + '删除成功');
-					},
-					onClearQueue: function(queueItemCount) {
-						console.log('有' + queueItemCount + '个文件被删除了');
-					},
-					onDestroy: function() {
-						console.log('destroyed!');
-					},
-					onSelect: function(file) {
-						console.log(file.name + '加入上传队列');
-					},
-					onQueueComplete: function(queueData) {
-						console.log('队列中的文件全部上传完成', queueData);
-					}
-				});
-				$('#btn2').click(function() {
-					u1.upload('*');
-				});
-				$('#btn3').click(function() {
-					u1.cancel('*');
-				});
-				$('#btn4').click(function() {
-					//up.disable();
-					u1.Huploadify('disable');
-				});
-				$('#btn5').click(function() {
-					u1.ennable();
-				});
-				$('#btn6').click(function() {
-					u1.destroy();
-				});
+				},
+				onCancel: function(file) {
+					//						console.log(file.name + '删除成功');
+				},
+				onClearQueue: function(queueItemCount) {
+					//						console.log('有' + queueItemCount + '个文件被删除了');
+				},
+				onDestroy: function() {
+					//						console.log('destroyed!');
+				},
+				onSelect: function(file) {
+					//						console.log(file.name + '加入上传队列');
+				},
+				onQueueComplete: function(queueData) {
+					//						console.log('队列中的文件全部上传完成', queueData);
+				}
 			});
-		</script>
-	</body>
+			var u2 = $('.u2').Huploadify({
+				auto: true,
+				fileTypeExts: '*.*', //允许上传的文件类型
+				multi: false,
+				buttonText: '点击上传',
+				removeTimeout: 1000,
+				formData: {
+					key: 123456,
+					key2: 'vvvv'
+				},
+				showUploadedSize: true,
+				uploader: 'ulAvatar.action',
+				onUploadStart: function(file) {
+					//						console.log(file.name + '开始上传');
+				},
+				onInit: function(obj) {
+					//						console.log(obj + '初始化...');
+				},
+				onUploadComplete: function(file) {
+					console.log(file.name + '上传完成');
+				},
+				onCancel: function(file) {
+					//						console.log(file.name + '删除成功');
+				},
+				onClearQueue: function(queueItemCount) {
+					//						console.log('有' + queueItemCount + '个文件被删除了');
+				},
+				onDestroy: function() {
+					//						console.log('destroyed!');
+				},
+				onSelect: function(file) {
+					//						console.log(file.name + '加入上传队列');
+				},
+				onQueueComplete: function(queueData) {
+					//						console.log('队列中的文件全部上传完成', queueData);
+				}
+			});
+			$('#btn2').click(function() {
+				u1.upload('*');
+			});
+			$('#btn3').click(function() {
+				u1.cancel('*');
+			});
+			$('#btn4').click(function() {
+				//up.disable();
+				u1.Huploadify('disable');
+			});
+			$('#btn5').click(function() {
+				u1.ennable();
+			});
+			$('#btn6').click(function() {
+				u1.destroy();
+			});
+		});
+	</script>
+</body>
 
 </html>

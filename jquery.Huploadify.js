@@ -3,7 +3,6 @@
 		var itemTemp = '<div id="${fileID}" class="uploadify-queue-item"><div class="uploadify-progress"><div class="uploadify-progress-bar"></div></div><span class="up_filename">${fileName}</span><a href="javascript:void(0);" class="uploadbtn">上传</a><a href="javascript:void(0);" class="delfilebtn">删除</a></div>';
 		var defaults = {
 			fileTypeExts: '*.*', //允许上传的文件类型，格式'*.jpg;*.doc'
-			//fileTypeDesc: 'image/*', //选择文件时过滤文件类型    firefox，ie10和chrome中有效
 			uploader: '', //文件提交的地址
 			auto: false, //是否开启自动上传
 			method: 'post', //发送请求的方式，get或post
@@ -57,7 +56,7 @@
 						return files[i];
 					}
 				}
-				return null；
+				return null;
 			}
 		};
 
@@ -75,7 +74,6 @@
 					inputStr += option.multi ? ' multiple' : '';
 					inputStr += ' accept="';
 					inputStr += F.getFileTypes(option.fileTypeExts).join(",");
-					//inputStr += option.fileTypeDesc;
 					inputStr += '"/>';
 					inputStr += '<a id="file_upload_' + instanceNumber + '-button" href="javascript:void(0)" class="uploadify-button">';
 					inputStr += option.buttonText;
